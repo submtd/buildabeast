@@ -1,0 +1,41 @@
+name: fbombnft
+recipe: laravel
+config:
+  php: '7.4'
+  webroot: ./public/
+  via: nginx
+  database: mysql:8.0
+  cache: redis
+env_file:
+  - .lando/repman.env
+services:
+  appserver:
+    build:
+      - composer config -g repo.dbdnet composer 'https://dbdnet.repo.repman.io'
+    build_as_root:
+      - curl -sL https://deb.nodesource.com/setup_14.x | bash -
+      - apt-get install -y nodejs
+    overrides:
+      environment:
+        APP_ENV: local
+        DB_HOST: database
+        DB_PORT: 3306
+        DB_DATABASE: laravel
+        DB_USERNAME: laravel
+        DB_PASSWORD: laravel
+        REDIS_HOST: cache
+        REDIS_PASSWORD: null
+        REDIS_PORT: 6379
+  database:
+    run_as_root:
+      - "mysql -uroot -e \"CREATE DATABASE IF NOT EXISTS testing; GRANT ALL PRIVILEGES ON testing.* TO 'laravel'@'%';\""
+tooling:
+  phpunit:
+    service: appserver
+    cmd: vendor/bin/phpunit
+  node:
+    service: appserver
+  npm:
+    service: appserver
+  npx:
+    service: appserver
