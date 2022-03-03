@@ -1,4 +1,4 @@
-name: fbombnft
+name: buildabeast
 recipe: laravel
 config:
   php: '7.4'
@@ -10,8 +10,6 @@ env_file:
   - .lando/repman.env
 services:
   appserver:
-    build:
-      - composer config -g repo.dbdnet composer 'https://dbdnet.repo.repman.io'
     build_as_root:
       - curl -sL https://deb.nodesource.com/setup_14.x | bash -
       - apt-get install -y nodejs
