@@ -1,4 +1,4 @@
-name: buildabeast
+name: nft
 recipe: laravel
 config:
   php: '7.4'

@@ -3,7 +3,6 @@
 /public/storage
 /public/js
 /public/css
-/public/mix-manifest.json
 /storage/*.key
 /vendor
 .env
@@ -16,9 +15,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-coverage
-coverage.json
-typechain
-scripts/addresses.json
-cache
-artifacts
