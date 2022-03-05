@@ -13,3 +13,10 @@ mix.js('resources/js/main.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .vue()
     .version();
+
+//mix.js('resources/js/main.js', 'public/js')
+    //.postCss('resources/css/app.css', 'public/css', [
+        //require('tailwindcss'),
+    //])
+    //.vue()
+    //.version();
