@@ -8,6 +8,8 @@ Route::group([
     Route::get('/', 'Home')->name('login');
     Route::post('address', 'UpdateAddress');
     Route::post('login', 'Login');
+    Route::get('session', 'Session');
+    Route::post('session', 'UpdateSession');
     Route::group([
         'middleware' => 'auth',
     ], static function () {

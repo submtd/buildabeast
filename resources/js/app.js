@@ -1,24 +1,14 @@
 const networkId = 4;
 const networkName = 'Rinkeby';
-// Bootstrap
-import "bootstrap";
 // Web3
 import Web3 from "web3";
-// Axios
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-let token = document.head.querySelector('meta[name="csrf-token"]');
-if(token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-}
-
-// Vue
-import { createApp } from "vue";
-const app = createApp({
+// App
+export default {
     data() {
         return {
             notice: null,
             alert: null,
+            wallet: null,
             web3: new Web3(),
             account: null,
             address: null,
@@ -34,6 +24,7 @@ const app = createApp({
         },
     },
     mounted() {
+        this.getSession();
         this.ping();
     },
     methods: {
@@ -60,6 +51,29 @@ const app = createApp({
                 }
             }, 5000);
         },
+        async getSession() {
+            await axios.get('/session').then(response => {
+                this.wallet = response.data.wallet;
+                if(typeof this.wallet != 'undefined') {
+                    this.$refs[this.wallet].connect();
+                }
+                this.account = response.data.account;
+                this.address = response.data.address;
+                this.connected = response.data.connected;
+                this.loggedIn = response.data.loggedIn;
+            }).catch(error => {});
+        },
+        async updateSession() {
+            await axios.post('/session', {
+                wallet: this.wallet,
+                account: this.account,
+                address: this.address,
+                connected: this.connected,
+                loggedIn: this.loggedIn,
+            }).then(response => {
+                console.log(response.data);
+            }).catch(error => {});
+        },
         async connect() {
             try {
                 this.alert = null;
@@ -72,9 +86,8 @@ const app = createApp({
                     address: this.account,
                 }).then(response => {
                     this.address = response.data.data;
-                }).catch(error => {
-                    console.error(error);
-                });
+                }).catch(error => {});
+                this.updateSession();
             } catch (error) {
                 this.alert = error.message;
                 return false;
@@ -95,9 +108,8 @@ const app = createApp({
             }).then(response => {
                 this.loggedIn = true;
                 this.address = response.data.data;
-            }).catch(error => {
-                console.error(error);
-            });
+            }).catch(error => {});
+            this.updateSession();
             this.notice = null;
         },
         async disconnect() {
@@ -114,16 +126,4 @@ const app = createApp({
             }
         }
     }
-});
-// Components
-import Disconnect from './components/Disconnect';
-app.component('disconnect', Disconnect);
-import Login from './components/Login';
-app.component('login', Login);
-import MetaMask from './components/wallets/MetaMask';
-app.component('meta-mask', MetaMask);
-import WalletConnect from './components/wallets/WalletConnect';
-import axios from "axios";
-app.component('wallet-connect', WalletConnect);
-// Mount
-app.mount('#app');
+}

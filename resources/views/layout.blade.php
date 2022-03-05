@@ -40,12 +40,12 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md text-center">
-                                    <meta-mask type="button" data-bs-dismiss="modal">
+                                    <meta-mask type="button" data-bs-dismiss="modal" ref="meta-mask">
                                         <img class="img-fluid" src="/images/metamask.svg" alt="metamask">
                                     </meta-mask>
                                 </div>
                                 <div class="col-md text-center">
-                                    <wallet-connect type="button" data-bs-dismiss="modal" rpc="">
+                                    <wallet-connect type="button" data-bs-dismiss="modal" rpc="" ref="wallet-connect">
                                         <img class="img-fluid" src="/images/walletconnect.svg" alt="walletconnect">
                                     </wallet-connect>
                                 </div>
@@ -66,6 +66,6 @@
                 @yield('content')
             </div>
         </div>
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ mix('js/main.js') }}"></script>
     </body>
 </html>

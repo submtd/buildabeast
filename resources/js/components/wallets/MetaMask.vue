@@ -8,6 +8,7 @@
     export default {
         methods: {
             connect() {
+                this.$parent.wallet = 'meta-mask';
                 try {
                     if (typeof window.ethereum == 'undefined') {
                         window.location.href = 'https://metamask.app.link/dapp/' + location.hostname;
