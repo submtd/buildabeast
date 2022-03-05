@@ -17,8 +17,9 @@ class CreateAddresses extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('address')->nullable()->unique();
+            $table->string('nonce');
             $table->string('name')->nullable();
-            $table->string('email')->nullable()->unique();
+            $table->string('email')->nullable()->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
