@@ -218,10 +218,8 @@
                 this.account = null;
                 this.address = null;
                 this.connected = false;
-                if(this.loggedIn) {
-                    await axios.post('/api/v1/logout');
-                }
                 this.loggedIn = false;
+                await axios.post('/api/v1/logout');
             }
         }
     }
