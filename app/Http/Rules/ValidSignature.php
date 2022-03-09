@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace App\Http\Rules;
 
 use App\Models\Address;
 use Illuminate\Contracts\Validation\DataAwareRule;

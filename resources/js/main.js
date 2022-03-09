@@ -7,21 +7,13 @@ let token = document.head.querySelector('meta[name="csrf-token"]');
 if(token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 }
+let networkId = document.head.querySelector('meta[name="network-id"]');
+let networkName = document.head.querySelector('meta[name="network-name"]');
 // Vue
 import { createApp } from "vue";
-
-// App Specific Stuff
-import App from "./app";
-const app = createApp(App);
-// Components
-import Disconnect from './components/Disconnect';
-app.component('disconnect', Disconnect);
-import Login from './components/Login';
-app.component('login', Login);
-import MetaMask from './components/wallets/MetaMask';
-app.component('meta-mask', MetaMask);
-import WalletConnect from './components/wallets/WalletConnect';
-import axios from "axios";
-app.component('wallet-connect', WalletConnect);
-// Mount
-app.mount('#app');
+import App from "./App.vue";
+import router from "./router";
+createApp(App, {
+    networkId: networkId.content,
+    networkName: networkName.content,
+}).use(router).mount('#app');

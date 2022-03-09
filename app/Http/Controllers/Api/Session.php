@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class Logout extends Controller
+class Session extends Controller
 {
     /**
      * Invoke.
+     *
+     * @param Request $request
      */
     public function __invoke(Request $request)
     {
-        Auth::logout();
-
-        return response()->json([]);
+        return $request->session()->get('web3', []);
     }
 }

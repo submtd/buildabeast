@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class Session extends Controller
+class UpdateSession extends Controller
 {
     /**
      * Invoke.
@@ -14,6 +14,8 @@ class Session extends Controller
      */
     public function __invoke(Request $request)
     {
+        $request->session()->put('web3', $request->all());
+
         return $request->session()->get('web3', []);
     }
 }

@@ -2,18 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
+// AJAX ROUTES
 Route::group([
-    'namespace' => 'App\Http\Controllers',
+    'prefix' => 'api/v1',
+    'namespace' => '\App\Http\Controllers\Api'
 ], static function () {
-    Route::get('/', 'Home')->name('login');
     Route::post('address', 'UpdateAddress');
     Route::post('login', 'Login');
     Route::get('session', 'Session');
     Route::post('session', 'UpdateSession');
-    Route::group([
-        'middleware' => 'auth',
-    ], static function () {
-        Route::post('logout', 'Logout');
-        Route::get('me', 'Me');
-    });
+    Route::post('logout', 'Logout');
 });
+// CATCHALL FOR SINGLE PAGE APPLICATION
+Route::get('{any}', 'App')->where('any', '.*');
