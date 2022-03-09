@@ -196,4 +196,5 @@ return [
 
     'network_id' => env('NETWORK_ID', 4),
     'network_name' => env('NETWORK_NAME', 'Rinkeby Testnet'),
+    'tag_manager_container_id' => env('TAG_MANAGER_CONTAINER_ID'),
 ];

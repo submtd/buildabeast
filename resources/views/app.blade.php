@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="tag-manager-container-id" content="{{ $tagManagerContainerId }}">
         <meta name="network-id" content="{{ $networkId }}">
         <meta name="network-name" content="{{ $networkName }}">
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
